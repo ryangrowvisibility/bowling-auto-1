@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: oklch(0.995 0.002 25);
+  --color-tint: oklch(0.967 0.008 25);
+  --color-line: oklch(0.9 0.01 25);
+  --color-ink: oklch(0.22 0.012 260);
+  --color-muted: oklch(0.45 0.012 260);
+  --color-brand: oklch(0.5 0.19 27);
+  --color-brand-dark: oklch(0.42 0.17 27);
+  --color-brand-soft: oklch(0.95 0.03 25);
+  --color-coal: oklch(0.27 0.012 260);
+  --color-star: oklch(0.78 0.16 75);
+  --font-head: var(--font-oswald);
+  --font-sans: var(--font-source);
+}
+
+html {
+  background: var(--color-paper) !important;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+body {
+  background: var(--color-paper) !important;
+  color: var(--color-ink);
+  font-family: var(--font-source), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-family: var(--font-oswald), system-ui, sans-serif;
+  letter-spacing: 0.005em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0 1.4rem;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, border-color 180ms ease;
+  touch-action: manipulation;
+}
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--color-star);
+  outline-offset: 3px;
+}
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1), transform 500ms cubic-bezier(0.23, 1, 0.32, 1); }
+.reveal.in { opacity: 1; transform: none; }
+
+details summary { list-style: none; cursor: pointer; }
+details summary::-webkit-details-marker { display: none; }
+details .faq-toggle { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+details[open] .faq-toggle { transform: rotate(45deg); }
+
+@media (hover: hover) and (pointer: fine) {
+  .lift { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 200ms ease; }
+  .lift:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px oklch(0.22 0.012 260 / 0.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .btn, .lift, details .faq-toggle { transition: none; }
+}
